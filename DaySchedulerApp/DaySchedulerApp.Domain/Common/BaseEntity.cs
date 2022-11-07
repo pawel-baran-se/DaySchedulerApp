@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaySchedulerApp.Domain
+namespace DaySchedulerApp.Domain.Common
 {
-    internal class Class1
+    public abstract class BaseEntity
     {
+        public int Id { get; set; }
     }
 }
