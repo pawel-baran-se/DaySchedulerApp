@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaySchedulerApp.Domain", "DaySchedulerApp.Domain\DaySchedulerApp.Domain.csproj", "{670A8D93-5A36-4CDE-A60C-E014B6E98BB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.Domain", "DaySchedulerApp.Domain\DaySchedulerApp.Domain.csproj", "{670A8D93-5A36-4CDE-A60C-E014B6E98BB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BA0BE6AF-10DC-4E0A-B892-14899306BD5A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{754EF23F-AA27-4F0B-A053-435BE40981BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaySchedulerApp.Application", "DaySchedulerApp.Application\DaySchedulerApp.Application.csproj", "{B19FE59F-5D70-4126-86FF-1630E4F27B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.Application", "DaySchedulerApp.Application\DaySchedulerApp.Application.csproj", "{B19FE59F-5D70-4126-86FF-1630E4F27B7D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{E4BC6632-4034-41E6-83B4-3045988E8A7D}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{99E2C5FB-D89E-4D9E-BDDF-3CCA2C69FC0E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{EE74CA00-DF90-4F5D-B36D-3E8273F96281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaySchedulerApp.Persistance", "DaySchedulerApp.Persistance\DaySchedulerApp.Persistance.csproj", "{175820BD-F040-4754-84C2-F283D73B2365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B19FE59F-5D70-4126-86FF-1630E4F27B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B19FE59F-5D70-4126-86FF-1630E4F27B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B19FE59F-5D70-4126-86FF-1630E4F27B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{175820BD-F040-4754-84C2-F283D73B2365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{175820BD-F040-4754-84C2-F283D73B2365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{175820BD-F040-4754-84C2-F283D73B2365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{175820BD-F040-4754-84C2-F283D73B2365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{E4BC6632-4034-41E6-83B4-3045988E8A7D} = {754EF23F-AA27-4F0B-A053-435BE40981BC}
 		{809AFD11-B1A6-43AA-8B50-21B7A82BDA6C} = {754EF23F-AA27-4F0B-A053-435BE40981BC}
 		{99E2C5FB-D89E-4D9E-BDDF-3CCA2C69FC0E} = {754EF23F-AA27-4F0B-A053-435BE40981BC}
+		{175820BD-F040-4754-84C2-F283D73B2365} = {99E2C5FB-D89E-4D9E-BDDF-3CCA2C69FC0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D9C4C62-1C2B-44D7-A4B8-0F8BADFA2B65}

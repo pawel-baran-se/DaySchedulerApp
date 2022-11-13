@@ -1,4 +1,6 @@
 ﻿using DaySchedulerApp.Domain.Common;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,13 @@ namespace DaySchedulerApp.Domain
 {
     public class Assignment : BaseEntity
     {
-        public string Name { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+        public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public int FrequencyInDays { get; set; }
         public bool SendNotification { get; set; }
-        public DateTime LatestCompletion { get; set; }
+        public DateTime? LatestCompletion { get; set; }
     }
 }
