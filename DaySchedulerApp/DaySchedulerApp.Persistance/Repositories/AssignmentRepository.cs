@@ -4,13 +4,12 @@ using DaySchedulerApp.Persistance.Configurations;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-
-
 namespace DaySchedulerApp.Persistance.Repositories
 {
     public class AssignmentRepository : IAssignmentRepository
     {
         private readonly IMongoCollection<Assignment> _assignmentCollection;
+
         public AssignmentRepository(IOptions<DaySchedulerDatabaseSettings> daySchedulerDatabaseSettings)
         {
             var mongoClient = new MongoClient(
@@ -22,7 +21,6 @@ namespace DaySchedulerApp.Persistance.Repositories
             _assignmentCollection = mongoDatabase.GetCollection<Assignment>(
                 daySchedulerDatabaseSettings.Value.AssignmentsCollectionName);
         }
-
 
         public async Task Add(Assignment entity)
         {

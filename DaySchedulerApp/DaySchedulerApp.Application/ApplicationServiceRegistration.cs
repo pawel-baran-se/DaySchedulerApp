@@ -7,7 +7,7 @@ namespace DaySchedulerApp.Application
     {
 
 
-        public static IServiceCollection DaySchedulerApplicationRegistration(this IServiceCollection services)
+        public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
