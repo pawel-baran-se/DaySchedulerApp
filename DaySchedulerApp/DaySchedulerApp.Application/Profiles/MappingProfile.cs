@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DaySchedulerApp.Application.DTOs;
+using DaySchedulerApp.Application.DTOs.Assignment;
 using DaySchedulerApp.Domain;
 
 namespace DaySchedulerApp.Application.Profiles
@@ -10,6 +10,7 @@ namespace DaySchedulerApp.Application.Profiles
         {
             CreateMap<Assignment, AssignmentDto>().ReverseMap();
             CreateMap<Assignment, AssignmentDetailDto>().ReverseMap();
+            CreateMap<Assignment, CreateAssignmentDto>().ReverseMap();
         }
     }
 }

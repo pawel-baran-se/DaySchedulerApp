@@ -10,8 +10,8 @@ namespace DaySchedulerApp.Application.Contracts
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetById(string id);
-        Task Add(T entity);
+        Task<T> Add(T entity);
         Task Update(T entity);
-        Task Delete(T entity);
+        Task Delete(string id);
     }
 }

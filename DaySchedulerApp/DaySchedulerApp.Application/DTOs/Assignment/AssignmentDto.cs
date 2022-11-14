@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaySchedulerApp.Application.DTOs
+namespace DaySchedulerApp.Application.DTOs.Assignment
 {
-    public class AssignmentDto
+    public class AssignmentDto : BaseDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

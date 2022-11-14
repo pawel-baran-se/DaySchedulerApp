@@ -22,14 +22,15 @@ namespace DaySchedulerApp.Persistance.Repositories
                 daySchedulerDatabaseSettings.Value.AssignmentsCollectionName);
         }
 
-        public async Task Add(Assignment entity)
+        public async Task<Assignment> Add(Assignment entity)
         {
             await _assignmentCollection.InsertOneAsync(entity);
+            return entity;
         }
 
-        public async Task Delete(Assignment entity)
+        public async Task Delete(string id)
         {
-            await _assignmentCollection.DeleteOneAsync(a => a.Id == entity.Id);
+            await _assignmentCollection.DeleteOneAsync(a => a.Id == id);
         }
 
         public async Task<IEnumerable<Assignment>> GetAllAsync()
