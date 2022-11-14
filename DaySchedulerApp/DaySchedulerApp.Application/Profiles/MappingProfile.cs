@@ -11,6 +11,7 @@ namespace DaySchedulerApp.Application.Profiles
             CreateMap<Assignment, AssignmentDto>().ReverseMap();
             CreateMap<Assignment, AssignmentDetailDto>().ReverseMap();
             CreateMap<Assignment, CreateAssignmentDto>().ReverseMap();
+            CreateMap<Assignment, UpdateAssignmentDto>().ReverseMap();
         }
     }
 }
