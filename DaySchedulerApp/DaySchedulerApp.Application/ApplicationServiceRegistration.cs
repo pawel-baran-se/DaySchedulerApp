@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DaySchedulerApp.Application.Contracts.Services;
+using DaySchedulerApp.Application.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace DaySchedulerApp.Application
@@ -11,6 +13,8 @@ namespace DaySchedulerApp.Application
         {
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IAssignmentService, AssignmentService>();
 
             return services;
         }
