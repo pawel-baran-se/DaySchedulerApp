@@ -3,17 +3,13 @@ using DaySchedulerApp.Domain;
 using DaySchedulerApp.Persistance.Configurations;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DaySchedulerApp.Persistance.Repositories
 {
     public class DayScheduleRepository : IDayScheduleRepository
     {
         private readonly IMongoCollection<DaySchedule> _daySchedulesCollection;
+
         public DayScheduleRepository(IOptions<DaySchedulerDatabaseSettings> daySchedulerDatabaseSettings)
         {
             var mongoClient = new MongoClient(
@@ -26,29 +22,29 @@ namespace DaySchedulerApp.Persistance.Repositories
                 daySchedulerDatabaseSettings.Value.DaySchedulesCollectionName);
         }
 
-        public Task Add(DaySchedule entity)
+        public async Task Add(DaySchedule entity)
         {
-            throw new NotImplementedException();
+            await _daySchedulesCollection.InsertOneAsync(entity);
         }
 
-        public Task Delete(DaySchedule entity)
+        public async Task Delete(DaySchedule entity)
         {
-            throw new NotImplementedException();
+            await _daySchedulesCollection.DeleteOneAsync(d => d.Id == entity.Id);
         }
 
-        public Task<IEnumerable<DaySchedule>> GetAllAsync()
+        public async Task<IEnumerable<DaySchedule>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _daySchedulesCollection.Find(_ => true).ToListAsync();
         }
 
-        public Task<DaySchedule> GetById(string id)
+        public async Task<DaySchedule> GetById(string id)
         {
-            throw new NotImplementedException();
+            return await _daySchedulesCollection.Find(d => d.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task Update(DaySchedule entity)
+        public async Task Update(DaySchedule entity)
         {
-            throw new NotImplementedException();
+            await _daySchedulesCollection.ReplaceOneAsync(d => d.Id == entity.Id, entity);
         }
     }
 }
