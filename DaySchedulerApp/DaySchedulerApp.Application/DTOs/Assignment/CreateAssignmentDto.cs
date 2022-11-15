@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DaySchedulerApp.Application.DTOs.Assignment
 {
-    public class CreateAssignmentDto : BaseDto
+    public class CreateAssignmentDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

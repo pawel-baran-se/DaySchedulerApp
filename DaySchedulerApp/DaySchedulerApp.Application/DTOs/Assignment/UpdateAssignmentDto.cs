@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DaySchedulerApp.Application.DTOs.Assignment
 {
-    public class UpdateAssignmentDto : BaseDto
+    public class UpdateAssignmentDto
     {
         public string Description { get; set; }
         public int FrequencyInDays { get; set; }

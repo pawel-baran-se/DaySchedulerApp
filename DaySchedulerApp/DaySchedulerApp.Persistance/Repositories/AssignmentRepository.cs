@@ -43,9 +43,9 @@ namespace DaySchedulerApp.Persistance.Repositories
             return await _assignmentCollection.Find(a => a.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task Update(Assignment entity)
+        public async Task Update(string id,Assignment entity)
         {
-            await _assignmentCollection.ReplaceOneAsync(a => a.Id == entity.Id, entity);
+            await _assignmentCollection.ReplaceOneAsync(a => a.Id == id, entity);
         }
     }
 }

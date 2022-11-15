@@ -27,27 +27,34 @@ namespace DaySchedulerApp.Api.Controllers
 
         // GET api/<AssignmentsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<AssignmentDetailDto>> Get(string id)
         {
-            return "value";
+            var assignment = await _assignmentService.GetAssignment(id);
+            return Ok(assignment);
         }
 
         // POST api/<AssignmentsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<AssignmentDto>> Post([FromBody] CreateAssignmentDto dto)
         {
+            var assignment = await _assignmentService.CreateAssignment(dto);
+            return Ok(assignment);
         }
 
         // PUT api/<AssignmentsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put(string id, [FromBody] UpdateAssignmentDto dto)
         {
+            await _assignmentService.UpdateAssignment(id, dto);
+            return NoContent();
         }
 
         // DELETE api/<AssignmentsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
+            await _assignmentService.DeleteAssignment(id);
+            return NoContent();
         }
     }
 }

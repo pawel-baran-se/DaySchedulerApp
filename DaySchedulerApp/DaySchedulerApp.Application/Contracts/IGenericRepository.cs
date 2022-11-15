@@ -11,7 +11,7 @@ namespace DaySchedulerApp.Application.Contracts
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetById(string id);
         Task<T> Add(T entity);
-        Task Update(T entity);
+        Task Update(string id, T entity);
         Task Delete(string id);
     }
 }

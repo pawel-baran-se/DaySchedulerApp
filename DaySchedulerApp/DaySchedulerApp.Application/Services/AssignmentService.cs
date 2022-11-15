@@ -48,10 +48,20 @@ namespace DaySchedulerApp.Application.Services
 
         public async Task<AssignmentDto> UpdateAssignment(string id, UpdateAssignmentDto updateAssignment)
         {
-            var assignment = _mapper.Map<Assignment>(updateAssignment);
-            await _assignmentRepository.Update(assignment);
+            var assignment = await _assignmentRepository.GetById(id);
+            var updatedAssignment = _mapper.Map<Assignment>(updateAssignment);
+            UpdateAssignment(assignment, updatedAssignment);
+            await _assignmentRepository.Update(id, updatedAssignment);
             var assignmentDto = _mapper.Map<AssignmentDto>(assignment);
             return assignmentDto;
+        }
+
+        private static void UpdateAssignment(Assignment assignment, Assignment updatedAssignment)
+        {
+            updatedAssignment.Id = assignment.Id;
+            updatedAssignment.Name = assignment.Name;
+            updatedAssignment.LatestCompletion = assignment.LatestCompletion;
+            updatedAssignment.UserId = assignment.UserId;
         }
     }
 }

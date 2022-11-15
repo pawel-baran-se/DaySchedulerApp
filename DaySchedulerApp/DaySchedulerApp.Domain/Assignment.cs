@@ -9,5 +9,6 @@ namespace DaySchedulerApp.Domain
         public int FrequencyInDays { get; set; }
         public bool SendNotification { get; set; }
         public DateTime? LatestCompletion { get; set; }
+        public string? UserId { get; set; }
     }
 }
