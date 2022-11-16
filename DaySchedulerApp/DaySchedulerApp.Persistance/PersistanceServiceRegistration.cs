@@ -13,7 +13,7 @@ namespace DaySchedulerApp.Persistance
             services.Configure<DaySchedulerDatabaseSettings>(configuration.GetSection("DaySchedulerDatabase"));
 
             services.AddSingleton<IAssignmentRepository, AssignmentRepository>();
-            services.AddSingleton<IDayScheduleRepository, DayScheduleRepository>();
+
 
             return services;
         }
