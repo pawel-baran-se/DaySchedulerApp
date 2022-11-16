@@ -1,3 +1,4 @@
+using DaySchedulerApp.Api.Middleware;
 using DaySchedulerApp.Application;
 using DaySchedulerApp.Persistance;
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureRepositoryServices(builder.Configuration);
 
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -22,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

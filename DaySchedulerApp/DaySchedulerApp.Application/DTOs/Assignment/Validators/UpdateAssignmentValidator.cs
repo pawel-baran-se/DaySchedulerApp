@@ -7,8 +7,8 @@ namespace DaySchedulerApp.Application.DTOs.Assignment.Validators
         public UpdateAssignmentValidator()
         {
             RuleFor(a => a.FrequencyInDays)
-                .GreaterThanOrEqualTo(1).WithMessage("Max once a day!")
-                .LessThanOrEqualTo(365).WithMessage("At least once a year!")
+                .GreaterThanOrEqualTo(1).WithMessage("Maximum once a day!")
+                .LessThanOrEqualTo(365).WithMessage("Minimum once a year!")
                 .NotNull();
 
             RuleFor(a => a.SendNotification)

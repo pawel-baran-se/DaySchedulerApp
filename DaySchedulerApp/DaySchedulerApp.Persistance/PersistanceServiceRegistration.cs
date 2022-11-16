@@ -14,7 +14,6 @@ namespace DaySchedulerApp.Persistance
 
             services.AddSingleton<IAssignmentRepository, AssignmentRepository>();
 
-
             return services;
         }
     }
