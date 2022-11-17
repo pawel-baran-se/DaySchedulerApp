@@ -1,10 +1,14 @@
 using DaySchedulerApp.Api.Middleware;
 using DaySchedulerApp.Application;
 using DaySchedulerApp.Persistance;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.ConfigurationSection(builder.Configuration.GetSection("Serilog")));
+//builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(builder.Configuration.GetSection("Serilog")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

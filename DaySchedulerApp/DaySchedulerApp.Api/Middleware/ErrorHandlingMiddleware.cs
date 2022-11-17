@@ -19,28 +19,28 @@ namespace DaySchedulerApp.Api.Middleware
             }
             catch (NotFoundException notFoundException)
             {
-                _logger.LogError(notFoundException.Message);
+                _logger.LogWarning(notFoundException.Message);
 
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
             catch (BadRequestException badRequestException)
             {
-                _logger.LogError(badRequestException.Message);
+                _logger.LogWarning(badRequestException.Message);
 
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync(badRequestException.Message);
             }
             catch (ValidationException validationException)
             {
-                _logger.LogError(validationException.Message);
+                _logger.LogWarning(validationException.Message);
 
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync(validationException.Message);
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogWarning(e.Message);
 
                 context.Response.StatusCode = 500;
 
