@@ -1,12 +1,13 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Extensions;
+using DaySchedulerApp.Application.Contracts.Services;
 using DaySchedulerApp.Application.Models.Identity;
 using DaySchedulerApp.Identity.Configurations;
 using DaySchedulerApp.Identity.Models;
+using DaySchedulerApp.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -14,15 +15,16 @@ namespace DaySchedulerApp.Identity
 {
     public static class IdentityServiceRegistration
     {
-
         public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<DayScheduleIdentitySettings>(configuration.GetSection("DaySchedulerDatabase"));
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
+            services.AddTransient<IAuthService, AuthService>();
+
             var identityConfiguration = new IdentityConfiguration(configuration).Configuration;
 
-            services.ConfigureMongoDbIdentity<ApplicationUser,ApplicationRole,Guid>(identityConfiguration)
+            services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(identityConfiguration)
                 .AddUserManager<UserManager<ApplicationUser>>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddRoleManager<RoleManager<ApplicationRole>>()
@@ -34,8 +36,6 @@ namespace DaySchedulerApp.Identity
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
-                o.RequireHttpsMetadata = true;
-                o.SaveToken = true;
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
