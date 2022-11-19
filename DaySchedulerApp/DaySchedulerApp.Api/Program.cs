@@ -1,5 +1,6 @@
 using DaySchedulerApp.Api.Middleware;
 using DaySchedulerApp.Application;
+using DaySchedulerApp.Identity;
 using DaySchedulerApp.Persistance;
 using Serilog;
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureRepositoryServices(builder.Configuration);
+builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 

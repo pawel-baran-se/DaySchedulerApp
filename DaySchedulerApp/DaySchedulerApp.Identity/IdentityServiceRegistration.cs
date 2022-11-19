@@ -20,7 +20,7 @@ namespace DaySchedulerApp.Identity
             services.Configure<DayScheduleIdentitySettings>(configuration.GetSection("DaySchedulerDatabase"));
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-            var identityConfiguration = new IdentityConfiguration((IOptions<DayScheduleIdentitySettings>) configuration).Configuration;
+            var identityConfiguration = new IdentityConfiguration(configuration).Configuration;
 
             services.ConfigureMongoDbIdentity<ApplicationUser,ApplicationRole,Guid>(identityConfiguration)
                 .AddUserManager<UserManager<ApplicationUser>>()

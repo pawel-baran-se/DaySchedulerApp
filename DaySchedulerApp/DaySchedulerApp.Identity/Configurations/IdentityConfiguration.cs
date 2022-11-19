@@ -1,4 +1,5 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,18 @@ namespace DaySchedulerApp.Identity.Configurations
 {
     public class IdentityConfiguration
     {
-        private readonly MongoDbIdentityConfiguration configuration;
-        public IdentityConfiguration(IOptions<DayScheduleIdentitySettings> settings)
+        private readonly MongoDbIdentityConfiguration identityConfiguration;
+
+        public IdentityConfiguration(IConfiguration configuration)
         {
-            configuration = new MongoDbIdentityConfiguration
+            var settings = configuration.GetSection("DaySchedulerDatabase").Get<DayScheduleIdentitySettings>();
+            identityConfiguration = new MongoDbIdentityConfiguration
             {
+
                 MongoDbSettings = new MongoDbSettings
                 {
-                    ConnectionString = settings.Value.ConnectionString,
-                    DatabaseName = settings.Value.DatabaseName,
+                    ConnectionString = settings.ConnectionString,
+                    DatabaseName = settings.DatabaseName,
                 },
                 IdentityOptionsAction = options =>
                 {
@@ -37,6 +41,6 @@ namespace DaySchedulerApp.Identity.Configurations
             };
         }
 
-        public MongoDbIdentityConfiguration Configuration { get => configuration; }
+        public MongoDbIdentityConfiguration Configuration { get => identityConfiguration; }
     }
 }
