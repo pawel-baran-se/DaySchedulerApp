@@ -6,6 +6,7 @@ using DaySchedulerApp.Application.DTOs.Assignment.Validators;
 using DaySchedulerApp.Application.Exceptions;
 using DaySchedulerApp.Application.Helper;
 using DaySchedulerApp.Domain;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using System.Text;
 
@@ -15,12 +16,15 @@ namespace DaySchedulerApp.Application.Services
     {
         private readonly IAssignmentRepository _assignmentRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<AssignmentService> _logger;
 
         public AssignmentService(IAssignmentRepository assignmentRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<AssignmentService> logger)
         {
             _assignmentRepository = assignmentRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<AssignmentDto> CreateAssignment(CreateAssignmentDto createAssignment)
@@ -82,7 +86,7 @@ namespace DaySchedulerApp.Application.Services
         {
             var assignments = await _assignmentRepository.GetAllAsync();
             var assignmentsDto = _mapper.Map<List<AssignmentDto>>(assignments);
-
+            _logger.LogInformation("test logging from service , PABLO!");
             return assignmentsDto;
         }
 
