@@ -9,10 +9,10 @@ namespace DaySchedulerApp.Application.Profiles
         public MappingProfile()
         {
             CreateMap<Assignment, AssignmentDto>().ReverseMap();
+            CreateMap<Assignment, AssignmentListDto>().ReverseMap();
             CreateMap<Assignment, AssignmentDetailDto>().ReverseMap();
             CreateMap<Assignment, CreateAssignmentDto>().ReverseMap();
             CreateMap<Assignment, UpdateAssignmentDto>().ReverseMap();
-            CreateMap<Assignment, ChangeNotificationSettingsDto>().ReverseMap();
         }
     }
 }

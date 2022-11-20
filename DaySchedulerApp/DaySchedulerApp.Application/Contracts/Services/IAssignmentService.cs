@@ -9,11 +9,12 @@ namespace DaySchedulerApp.Application.Contracts.Services
 
         Task<AssignmentDto> UpdateAssignment(string id, UpdateAssignmentDto updateAssignment);
         Task<AssignmentDto> UpdateNoificationSettings(string id, ChangeNotificationSettingsDto updateAssignment);
+        Task<bool> UpdateCompletionDate(string id);
 
         Task<bool> DeleteAssignment(string id);
 
         Task<AssignmentDetailDto> GetAssignment(string id);
 
-        Task<IEnumerable<AssignmentDto>> GetAssignments();
+        Task<IEnumerable<AssignmentListDto>> GetAssignments();
     }
 }

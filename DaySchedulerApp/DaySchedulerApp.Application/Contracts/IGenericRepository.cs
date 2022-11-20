@@ -9,7 +9,7 @@ namespace DaySchedulerApp.Application.Contracts
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync();
         Task<T> GetById(string id);
         Task<T> Add(T entity);
         Task Update(string id, T entity);

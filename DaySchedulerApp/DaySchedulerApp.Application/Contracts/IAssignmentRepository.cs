@@ -9,5 +9,6 @@ namespace DaySchedulerApp.Application.Contracts
 {
     public interface IAssignmentRepository : IGenericRepository<Assignment>
     {
+        Task<List<Assignment>> GetByUserId(string userId);
     }
 }

@@ -52,7 +52,7 @@ namespace DaySchedulerApp.Api.Controllers
             return NoContent();
         }
 
-        [HttpPut("changenotification/{id}")]
+        [HttpPut("{id}/changenotification")]
         public async Task<ActionResult> ChangeSendNotificationSettings(string id, [FromBody] ChangeNotificationSettingsDto dto)
         {
             await _assignmentService.UpdateNoificationSettings(id, dto);

@@ -33,7 +33,7 @@ namespace DaySchedulerApp.Persistance.Repositories
             await _collection.DeleteOneAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _collection.Find(_ => true).ToListAsync();
         }

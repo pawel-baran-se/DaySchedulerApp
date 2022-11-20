@@ -89,12 +89,18 @@ namespace DaySchedulerApp.Application.Services
             return assignmentDetailDto;
         }
 
-        public async Task<IEnumerable<AssignmentDto>> GetAssignments()
+        public async Task<IEnumerable<AssignmentListDto>> GetAssignments()
         {
+            var assignments = new List<Assignment>();
             var user = _authorizationService.GetCurrentUser();
 
-            var assignments = await _assignmentRepository.GetAllAsync();
-            var assignmentsDto = _mapper.Map<List<AssignmentDto>>(assignments);
+            if(user.Role == Enum.UserRole.ADMINISTRATOR)
+                assignments = await _assignmentRepository.GetAllAsync();
+
+            if (user.Role == Enum.UserRole.USER)
+                assignments = await _assignmentRepository.GetByUserId(user.Id);
+
+            var assignmentsDto = _mapper.Map<List<AssignmentListDto>>(assignments);
             _logger.LogInformation("test logging from service , PABLO!");
             return assignmentsDto;
         }
@@ -158,5 +164,23 @@ namespace DaySchedulerApp.Application.Services
             return assignmentDto;
         }
 
+        public async Task<bool> UpdateCompletionDate(string id)
+        {
+            var assignment = await _assignmentRepository.GetById(id);
+
+            assignment.LatestCompletion = DateTime.Now;
+
+            try
+            {
+                await _assignmentRepository.Update(id, assignment);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"Latest Completion date update not successful.", ex.Message);
+                return false;
+            }
+
+            return true;
+        }
     }
 }
