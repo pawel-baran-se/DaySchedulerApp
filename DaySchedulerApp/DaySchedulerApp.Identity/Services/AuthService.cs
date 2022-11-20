@@ -16,6 +16,8 @@ namespace DaySchedulerApp.Identity.Services
 {
     public class AuthService : IAuthService
     {
+        private const string _ROLE = "USER";
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
@@ -89,7 +91,7 @@ namespace DaySchedulerApp.Identity.Services
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "USER");
+                    await _userManager.AddToRoleAsync(user, _ROLE);
                     return new RegistrationResponse() { UserId = user.Id.ToString() };
                 }
                 else

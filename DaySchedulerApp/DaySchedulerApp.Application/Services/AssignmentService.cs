@@ -8,7 +8,6 @@ using DaySchedulerApp.Application.Helper;
 using DaySchedulerApp.Domain;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
-using System.Security.Claims;
 using System.Text;
 
 namespace DaySchedulerApp.Application.Services
@@ -18,14 +17,17 @@ namespace DaySchedulerApp.Application.Services
         private readonly IAssignmentRepository _assignmentRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<AssignmentService> _logger;
+        private readonly IAuthorizationService _authorizationService;
 
         public AssignmentService(IAssignmentRepository assignmentRepository,
             IMapper mapper,
-            ILogger<AssignmentService> logger)
+            ILogger<AssignmentService> logger,
+            IAuthorizationService authorizationService)
         {
             _assignmentRepository = assignmentRepository;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
         }
 
         public async Task<AssignmentDto> CreateAssignment(CreateAssignmentDto createAssignment)
@@ -39,8 +41,12 @@ namespace DaySchedulerApp.Application.Services
                 StringBuilder sb = ValidationHelper.GenerateErrorMessage(result);
                 throw new ValidationException(sb.ToString());
             }
+            var user = _authorizationService.GetCurrentUser();
 
             var assignment = _mapper.Map<Assignment>(createAssignment);
+
+            assignment.UserId = user.Id;
+            assignment.NextCompletion = DateTime.Now.AddDays(assignment.FrequencyInDays);
 
             await _assignmentRepository.Add(assignment);
 
@@ -85,6 +91,8 @@ namespace DaySchedulerApp.Application.Services
 
         public async Task<IEnumerable<AssignmentDto>> GetAssignments()
         {
+            var user = _authorizationService.GetCurrentUser();
+
             var assignments = await _assignmentRepository.GetAllAsync();
             var assignmentsDto = _mapper.Map<List<AssignmentDto>>(assignments);
             _logger.LogInformation("test logging from service , PABLO!");

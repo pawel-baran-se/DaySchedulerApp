@@ -15,6 +15,7 @@ namespace DaySchedulerApp.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IAssignmentService, AssignmentService>();
+            services.AddScoped<IAuthorizationService, AuthorizationService>();
 
             return services;
         }
