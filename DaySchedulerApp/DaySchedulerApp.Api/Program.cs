@@ -1,3 +1,4 @@
+using DaySchedulerApp.Api.Helpers;
 using DaySchedulerApp.Api.Middleware;
 using DaySchedulerApp.Application;
 using DaySchedulerApp.Identity;
@@ -14,7 +15,8 @@ builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Confi
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureJwtSwaggerAuthorization();
+//builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureRepositoryServices(builder.Configuration);

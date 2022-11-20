@@ -1,6 +1,7 @@
 ﻿using DaySchedulerApp.Application.Contracts.Services;
 using DaySchedulerApp.Application.Models.Identity;
 using DaySchedulerApp.Identity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,7 @@ namespace DaySchedulerApp.Api.Controllers
         // POST api/<AccountController>
         [HttpPost]
         [Route("roles/add")]
+        [Authorize(Roles = "ADMINISTRATOR")]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest request)
         {
             await _authService.CreateRole(request);

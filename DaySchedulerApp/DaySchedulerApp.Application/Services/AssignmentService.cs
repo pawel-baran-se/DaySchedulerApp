@@ -8,6 +8,7 @@ using DaySchedulerApp.Application.Helper;
 using DaySchedulerApp.Domain;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
+using System.Security.Claims;
 using System.Text;
 
 namespace DaySchedulerApp.Application.Services
