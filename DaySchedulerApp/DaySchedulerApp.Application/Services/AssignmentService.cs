@@ -121,23 +121,42 @@ namespace DaySchedulerApp.Application.Services
             if (assignment == null)
                 throw new NotFoundException("Not Found!");
 
-            var updatedAssignment = _mapper.Map<Assignment>(updateAssignment);
+            if (ValidationHelper.StringInputValidation(updateAssignment.Description))
+            {
+                assignment.Description = updateAssignment.Description;
+            }
 
-            UpdateAssignment(assignment, updatedAssignment);
+            if (updateAssignment.FrequencyInDays != assignment.FrequencyInDays)
+            {
+                assignment.FrequencyInDays = updateAssignment.FrequencyInDays;
+            }
 
-            await _assignmentRepository.Update(id, updatedAssignment);
+            await _assignmentRepository.Update(id, assignment);
 
             var assignmentDto = _mapper.Map<AssignmentDto>(assignment);
 
             return assignmentDto;
         }
 
-        private static void UpdateAssignment(Assignment assignment, Assignment updatedAssignment)
+        public async Task<AssignmentDto> UpdateNoificationSettings(string id, ChangeNotificationSettingsDto updateAssignment)
         {
-            updatedAssignment.Id = assignment.Id;
-            updatedAssignment.Name = assignment.Name;
-            updatedAssignment.LatestCompletion = assignment.LatestCompletion;
-            updatedAssignment.UserId = assignment.UserId;
+            if (!ObjectId.TryParse(id, out _))
+            {
+                throw new BadRequestException("Invalid Id type!");
+            }
+
+            var assignment = await _assignmentRepository.GetById(id);
+
+            if (assignment == null)
+                throw new NotFoundException("Not Found!");
+
+            assignment.SendNotification = updateAssignment.SendNotification;
+            await _assignmentRepository.Update(id, assignment);
+
+            var assignmentDto = _mapper.Map<AssignmentDto>(assignment);
+
+            return assignmentDto;
         }
+
     }
 }

@@ -20,5 +20,22 @@ namespace DaySchedulerApp.Application.Helper
 
             return sb;
         }
+
+        internal static bool StringInputValidation(string toValidate)
+        {
+            List<string> forbidden = new() { "", "string" };
+            bool result;
+
+            foreach (var forbid in forbidden)
+            {
+                var comparisonResult = String.Compare(toValidate, forbid);
+                if(comparisonResult == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+
     }
 }

@@ -8,6 +8,7 @@ namespace DaySchedulerApp.Application.Contracts.Services
         Task<AssignmentDto> CreateAssignment(CreateAssignmentDto createAssignment);
 
         Task<AssignmentDto> UpdateAssignment(string id, UpdateAssignmentDto updateAssignment);
+        Task<AssignmentDto> UpdateNoificationSettings(string id, ChangeNotificationSettingsDto updateAssignment);
 
         Task<bool> DeleteAssignment(string id);
 

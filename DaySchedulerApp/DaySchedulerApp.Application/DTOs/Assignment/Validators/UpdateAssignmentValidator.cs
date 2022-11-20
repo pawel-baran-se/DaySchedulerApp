@@ -11,8 +11,6 @@ namespace DaySchedulerApp.Application.DTOs.Assignment.Validators
                 .LessThanOrEqualTo(365).WithMessage("Minimum once a year!")
                 .NotNull();
 
-            RuleFor(a => a.SendNotification)
-                .NotNull();
         }
     }
 }

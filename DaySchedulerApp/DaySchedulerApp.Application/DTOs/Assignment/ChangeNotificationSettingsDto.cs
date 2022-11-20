@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DaySchedulerApp.Application.DTOs.Assignment
 {
-    public class UpdateAssignmentDto
+    public class ChangeNotificationSettingsDto
     {
-        public string Description { get; set; }
-        public int FrequencyInDays { get; set; }
+        public bool SendNotification { get; set; }
     }
 }

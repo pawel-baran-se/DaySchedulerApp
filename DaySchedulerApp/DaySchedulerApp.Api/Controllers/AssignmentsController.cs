@@ -52,6 +52,13 @@ namespace DaySchedulerApp.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("changenotification/{id}")]
+        public async Task<ActionResult> ChangeSendNotificationSettings(string id, [FromBody] ChangeNotificationSettingsDto dto)
+        {
+            await _assignmentService.UpdateNoificationSettings(id, dto);
+            return NoContent();
+        }
+
         // DELETE api/<AssignmentsController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
