@@ -21,6 +21,7 @@ namespace DaySchedulerApp.Identity
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.AddTransient<IAuthService, AuthService>();
+            services.AddScoped<IPasswordHasher<ApplicationUser>, PasswordHasher<ApplicationUser>>();
 
             var identityConfiguration = new IdentityConfiguration(configuration).Configuration;
 
@@ -33,6 +34,7 @@ namespace DaySchedulerApp.Identity
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {

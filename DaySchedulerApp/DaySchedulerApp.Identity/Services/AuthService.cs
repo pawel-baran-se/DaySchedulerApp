@@ -20,16 +20,19 @@ namespace DaySchedulerApp.Identity.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IOptions<JwtSettings> _jwtSettings;
+        private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 
         public AuthService(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
-            IOptions<JwtSettings> jwtSettings)
+            IOptions<JwtSettings> jwtSettings,
+            IPasswordHasher<ApplicationUser> passwordHasher)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _jwtSettings = jwtSettings;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<LoginResponse> Login(LoginRequest request)
@@ -41,9 +44,9 @@ namespace DaySchedulerApp.Identity.Services
                 throw new Exception($"User with {request.Email} not found.");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
 
-            if (!result.Succeeded)
+            if (result == PasswordVerificationResult.Failed)
             {
                 throw new Exception($"Credentials are incorrect.");
             }
