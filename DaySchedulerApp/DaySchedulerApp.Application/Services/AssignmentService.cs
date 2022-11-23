@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using DaySchedulerApp.Application.Contracts;
+using DaySchedulerApp.Application.Contracts.Infrastructure;
 using DaySchedulerApp.Application.Contracts.Services;
 using DaySchedulerApp.Application.DTOs.Assignment;
 using DaySchedulerApp.Application.DTOs.Assignment.Validators;
 using DaySchedulerApp.Application.Exceptions;
 using DaySchedulerApp.Application.Helper;
+using DaySchedulerApp.Application.Models.Email;
 using DaySchedulerApp.Domain;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -18,16 +20,19 @@ namespace DaySchedulerApp.Application.Services
         private readonly IMapper _mapper;
         private readonly ILogger<AssignmentService> _logger;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IEmailSender _emailSender;
 
         public AssignmentService(IAssignmentRepository assignmentRepository,
             IMapper mapper,
             ILogger<AssignmentService> logger,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IEmailSender emailSender)
         {
             _assignmentRepository = assignmentRepository;
             _mapper = mapper;
             _logger = logger;
             _authorizationService = authorizationService;
+            _emailSender = emailSender;
         }
 
         public async Task<AssignmentDto> CreateAssignment(CreateAssignmentDto createAssignment)
@@ -91,6 +96,16 @@ namespace DaySchedulerApp.Application.Services
 
         public async Task<IEnumerable<AssignmentListDto>> GetAssignments()
         {
+
+            var testEmail = new Email
+            {
+                To = "pawelbaranc@gmail.com",
+                Body = "Testowy meil no. 1",
+                Subject = "DayScheduler Test Email no.1"
+            };
+
+            await _emailSender.SendEmail(testEmail);
+
             var assignments = new List<Assignment>();
             var user = _authorizationService.GetCurrentUser();
 

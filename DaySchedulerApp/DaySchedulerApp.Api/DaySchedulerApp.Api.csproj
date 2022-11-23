@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DaySchedulerApp.Application\DaySchedulerApp.Application.csproj" />
     <ProjectReference Include="..\DaySchedulerApp.Identity\DaySchedulerApp.Identity.csproj" />
+    <ProjectReference Include="..\DaySchedulerApp.Infrastructure\DaySchedulerApp.Infrastructure.csproj" />
     <ProjectReference Include="..\DaySchedulerApp.Persistance\DaySchedulerApp.Persistance.csproj" />
   </ItemGroup>
 

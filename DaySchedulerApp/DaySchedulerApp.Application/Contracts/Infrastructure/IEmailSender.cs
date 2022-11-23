@@ -9,6 +9,6 @@ namespace DaySchedulerApp.Application.Contracts.Infrastructure
 {
     public interface IEmailSender
     {
-        Task<bool> SendEmail(Email Email);
+        Task<bool> SendEmail(Email email);
     }
 }

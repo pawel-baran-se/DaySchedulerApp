@@ -1,4 +1,6 @@
-﻿using DaySchedulerApp.Application.Models.Email;
+﻿using DaySchedulerApp.Application.Contracts.Infrastructure;
+using DaySchedulerApp.Application.Models.Email;
+using DaySchedulerApp.Infrastructure.Mail;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,7 +17,7 @@ namespace DaySchedulerApp.Infrastructure
         public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<EmailSettings>(configuration.GetSection("EmailSender"));
-
+            services.AddTransient<IEmailSender, EmailSender>();
 
             return services;
         }
