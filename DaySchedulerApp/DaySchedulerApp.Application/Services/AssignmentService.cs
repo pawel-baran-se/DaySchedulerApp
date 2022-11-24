@@ -96,16 +96,6 @@ namespace DaySchedulerApp.Application.Services
 
         public async Task<IEnumerable<AssignmentListDto>> GetAssignments()
         {
-
-            var testEmail = new Email
-            {
-                To = "pawelbaranc@gmail.com",
-                Body = "Testowy meil no. 1",
-                Subject = "DayScheduler Test Email no.1"
-            };
-
-            await _emailSender.SendEmail(testEmail);
-
             var assignments = new List<Assignment>();
             var user = _authorizationService.GetCurrentUser();
 
