@@ -17,6 +17,8 @@ namespace DaySchedulerApp.Application
             services.AddScoped<IAssignmentService, AssignmentService>();
             services.AddScoped<IAuthorizationService, AuthorizationService>();
 
+            services.AddHostedService<BackgroundWorkerService>();
+
             return services;
         }
     }
