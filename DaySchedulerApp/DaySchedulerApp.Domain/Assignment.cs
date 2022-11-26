@@ -10,6 +10,6 @@ namespace DaySchedulerApp.Domain
         public bool SendNotification { get; set; }
         public DateTime? LatestCompletion { get; set; }
         public DateTime? NextCompletion { get; set; }
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

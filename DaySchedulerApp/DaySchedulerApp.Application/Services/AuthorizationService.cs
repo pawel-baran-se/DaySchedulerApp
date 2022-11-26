@@ -35,5 +35,14 @@ namespace DaySchedulerApp.Application.Services
 
             return appUser;
         }
+
+        public bool ValidateUserId(string assignmentUserId)
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(_USERID)?.Value;
+            if (userId == assignmentUserId)
+                return true;
+
+            return false;
+        }
     }
 }

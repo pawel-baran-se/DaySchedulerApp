@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using DaySchedulerApp.Domain;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,5 @@ namespace DaySchedulerApp.Application.Helper
 
             return true;
         }
-
-
     }
 }

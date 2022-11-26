@@ -72,6 +72,9 @@ namespace DaySchedulerApp.Application.Services
             if (assignment == null)
                 throw new NotFoundException("Not Found!");
 
+            if (!_authorizationService.ValidateUserId(assignment.UserId))
+                throw new BadRequestException("Invalid Request!");
+
             await _assignmentRepository.Delete(id);
 
             return true;
@@ -132,6 +135,9 @@ namespace DaySchedulerApp.Application.Services
             if (assignment == null)
                 throw new NotFoundException("Not Found!");
 
+            if (!_authorizationService.ValidateUserId(assignment.UserId))
+                throw new BadRequestException("Invalid Request!");
+
             if (ValidationHelper.StringInputValidation(updateAssignment.Description))
             {
                 assignment.Description = updateAssignment.Description;
@@ -160,6 +166,9 @@ namespace DaySchedulerApp.Application.Services
 
             if (assignment == null)
                 throw new NotFoundException("Not Found!");
+
+            if (!_authorizationService.ValidateUserId(assignment.UserId))
+                throw new BadRequestException("Invalid Request!");
 
             assignment.SendNotification = updateAssignment.SendNotification;
             await _assignmentRepository.Update(id, assignment);
