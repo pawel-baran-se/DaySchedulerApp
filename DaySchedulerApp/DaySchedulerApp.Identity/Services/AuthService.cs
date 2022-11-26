@@ -1,4 +1,5 @@
 ﻿using DaySchedulerApp.Application.Contracts.Services;
+using DaySchedulerApp.Application.Enum;
 using DaySchedulerApp.Application.Models.Identity;
 using DaySchedulerApp.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@ namespace DaySchedulerApp.Identity.Services
 {
     public class AuthService : IAuthService
     {
-        private const string _ROLE = "USER";
+        private const string _USEROLE = "USER";
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -91,7 +92,7 @@ namespace DaySchedulerApp.Identity.Services
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, _ROLE);
+                    await _userManager.AddToRoleAsync(user, _USEROLE);
                     return new RegistrationResponse() { UserId = user.Id.ToString() };
                 }
                 else
@@ -149,7 +150,15 @@ namespace DaySchedulerApp.Identity.Services
             return jwtSecurityToken;
         }
 
-
-
+        public async Task<List<AppUser>> GetAplicationUsers()
+        {
+            List<AppUser> users = new();
+            var usersDb = await _userManager.GetUsersInRoleAsync(_USEROLE);
+            foreach (var user in usersDb)
+            {
+                users.Add(new AppUser { Id = user.Id.ToString(), Email = user.Email, Role = UserRole.USER, Name = user.UserName });
+            }
+            return users;
+        }
     }
 }

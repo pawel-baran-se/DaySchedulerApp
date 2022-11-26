@@ -41,5 +41,15 @@ namespace DaySchedulerApp.Api.Controllers
             await _authService.CreateRole(request);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("users")]
+        [Authorize(Roles = "ADMINISTRATOR")]
+        public async Task<IActionResult> GetUsers()
+        {
+            return Ok(await _authService.GetAplicationUsers());
+        }
+
+
     }
 }

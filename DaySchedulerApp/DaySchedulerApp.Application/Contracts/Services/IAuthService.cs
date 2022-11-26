@@ -12,5 +12,6 @@ namespace DaySchedulerApp.Application.Contracts.Services
         Task<LoginResponse> Login(LoginRequest request);
         Task<RegistrationResponse> Register(RegistrationRequest request);
         Task<bool> CreateRole(CreateRoleRequest request);
+        Task<List<AppUser>> GetAplicationUsers();
     }
 }
