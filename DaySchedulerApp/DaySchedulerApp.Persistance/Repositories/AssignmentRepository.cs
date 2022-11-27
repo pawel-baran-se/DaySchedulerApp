@@ -3,6 +3,7 @@ using DaySchedulerApp.Domain;
 using DaySchedulerApp.Persistance.Configurations;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Linq;
 
 namespace DaySchedulerApp.Persistance.Repositories
 {
@@ -25,6 +26,11 @@ namespace DaySchedulerApp.Persistance.Repositories
         public async Task<List<Assignment>> GetByUserId(string userId)
         {
             return await _collection.Find(a => a.UserId == userId).ToListAsync();
+        }
+
+        public async Task<List<Assignment>> GetNotifiableForUserById(string userId)
+        {
+            return await _collection.Find(a => a.UserId == userId && a.SendNotification == true).ToListAsync();
         }
     }
 }
