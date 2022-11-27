@@ -9,7 +9,7 @@ namespace DaySchedulerApp.Application.Contracts.Services
 
         Task<AssignmentDto> UpdateAssignment(string id, UpdateAssignmentDto updateAssignment);
         Task<AssignmentDto> UpdateNoificationSettings(string id, ChangeNotificationSettingsDto updateAssignment);
-        Task<bool> UpdateCompletionDate(string id);
+        Task<bool> UpdateCompletionDate(List<Assignment> assignments);
 
         Task<bool> DeleteAssignment(string id);
 

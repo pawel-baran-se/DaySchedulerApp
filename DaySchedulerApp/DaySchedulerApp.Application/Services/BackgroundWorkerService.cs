@@ -12,9 +12,8 @@ namespace DaySchedulerApp.Application.Services
 {
     public class BackgroundWorkerService : BackgroundService
     {
-        private const int _HOUR = 14;
-        private const int _MINUTE = 50;
-
+        private const int _HOUR = 15;
+        private const int _MINUTE = 55;
 
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<BackgroundWorkerService> _logger;
@@ -37,7 +36,7 @@ namespace DaySchedulerApp.Application.Services
         {
             _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
 
-            while (true)
+            while(true)
             {
                 await SendAssignmentList();
 
@@ -50,23 +49,26 @@ namespace DaySchedulerApp.Application.Services
         {
             TimeOnly executingTime = new TimeOnly(_HOUR, _MINUTE);
             var now = DateTime.Now;
+
             if (now.Hour == executingTime.Hour && now.Minute == executingTime.Minute)
             {
-                var subject = $"Day Scheduler - Plan {now}";
+                var subject = $"Day Scheduler - Plan {now.Date}";
                 using (IServiceScope scope = _serviceProvider.CreateScope())
                 {
                     var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
+                    var assignmentService = scope.ServiceProvider.GetRequiredService<IAssignmentService>();
                     var users = await authService.GetAplicationUsers();
                     foreach (var user in users)
                     {
                         var assignments = await _assignmentRepository.GetCurrentAssignmentsForUser(user.Id);
-                        if (assignments != null)
+                        if (assignments.Count != 0)
                         {
                             string body = GenerateAssignmentList(assignments);
 
                             var email = new Email() { To = user.Email, Subject = subject, Body = body };
 
                             await _emailSender.SendEmail(email);
+                            await assignmentService.UpdateCompletionDate(assignments);
                         }
                     }
                 }
@@ -86,7 +88,7 @@ namespace DaySchedulerApp.Application.Services
             {
                 var assignmentPosition = $"<li>{counter}: {assignment.Name}</li>";
                 sb.AppendLine(assignmentPosition);
-                counter ++;
+                counter++;
             }
             sb.AppendLine("</ul>");
 
@@ -98,6 +100,5 @@ namespace DaySchedulerApp.Application.Services
             _logger.LogInformation($"Background Worker stopped at {DateTime.Now}");
             await base.StopAsync(cancellationToken);
         }
-
     }
 }
