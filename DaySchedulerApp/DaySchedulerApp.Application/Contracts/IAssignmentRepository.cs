@@ -11,5 +11,6 @@ namespace DaySchedulerApp.Application.Contracts
     {
         Task<List<Assignment>> GetByUserId(string userId);
         Task<List<Assignment>> GetNotifiableForUserById(string userId);
+        Task<List<Assignment>> GetCurrentAssignmentsForUser(string userId);
     }
 }
