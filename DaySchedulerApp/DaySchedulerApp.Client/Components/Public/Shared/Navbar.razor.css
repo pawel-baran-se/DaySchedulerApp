@@ -3,7 +3,8 @@
     font-size: 1.25rem;
     background-color: transparent;
     padding: 0;
-    margin: 1rem 0 1rem 0;
+    margin: 0.7rem 0 0.7rem 0;
+
 }
 
 .nav-link:hover {
@@ -12,4 +13,10 @@
 
 .bg-body-tertiary {
     background-color: #C0CBD1 !important;
+}
+
+.active {
+    border-style: solid;
+    border-width: thin;
+    border-color: #5F8399;
 }

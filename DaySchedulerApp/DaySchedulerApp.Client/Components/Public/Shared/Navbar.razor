@@ -11,30 +11,31 @@
 	  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 		<li class="nav-item">
-		  <a class="nav-link active" aria-current="page" href="@HomePageUri">Home</a>
+		  <a class="nav-link @(IsActive(HomePageUri) ? "active" : string.Empty)" aria-current="page" href="@HomePageUri">Home</a>
 		</li>
 
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@ProfilePageUri">Profile</a>
+		  <a class="nav-link @(IsActive(ProfilePageUri) ? "active" : string.Empty)" aria-current="page" href="@ProfilePageUri">Profile</a>
 		</li>
 
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@TaskOverviewUri">Tasks</a>
+		  <a class="nav-link @(IsActive(TaskOverviewUri) ? "active" : string.Empty)" aria-current="page" href="@TaskOverviewUri">Tasks</a>
 		</li>
+
 	  </ul>
 
 	  <ul class="navbar-nav ms-auto">
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@LoginUri">Login</a>
+		  <a class="nav-link" aria-current="page" href="@LoginPageUri">Login</a>
 		</li>
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@RegisterUri">Register</a>
+		  <a class="nav-link" aria-current="page" href="@RegisterPageUri">Register</a>
 		</li>
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@AboutUri">About</a>
+		  <a class="nav-link" aria-current="page" href="@AboutPageUri">About</a>
 		</li>
 		<li class="nav-item">
-		  <a class="nav-link" aria-current="page" href="@ContactUri">Contact</a>
+		  <a class="nav-link" aria-current="page" href="@ContactPageUri">Contact</a>
 		</li>
 	  </ul>
 
@@ -47,9 +48,35 @@
 	public const string HomePageUri = "/";
 	public const string ProfilePageUri = "/profile";
 	public const string TaskOverviewUri = "/tasks";
-	public const string LoginUri = "/login";
-	public const string RegisterUri = "/register";
-	public const string AboutUri = "/about";
-	public const string ContactUri = "/contact";
+	public const string LoginPageUri = "/login";
+	public const string RegisterPageUri = "/register";
+	public const string AboutPageUri = "/about";
+	public const string ContactPageUri = "/contact";
+
+	[Inject] public NavigationManager? NavigationManager { get; set; }
+
+	private bool IsActive(string uriToCheck)
+	{
+		var currentUri = NavigationManager.Uri.Split("/").Skip(3).ToArray();
+
+		if (uriToCheck == HomePageUri)
+		{
+			if (currentUri.Last().Length == 0)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			var uriToCheckSplited = uriToCheck.Split("/").Skip(1).ToArray();
+
+			if (uriToCheckSplited.First() == currentUri.First())
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 }
