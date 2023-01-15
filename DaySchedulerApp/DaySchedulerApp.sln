@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.UnitTests", "DaySchedulerApp.UnitTests\DaySchedulerApp.UnitTests.csproj", "{B15AC37B-FF13-4C8A-8963-1E2FBC64B8CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaySchedulerApp.Client", "DaySchedulerApp.Client\DaySchedulerApp.Client.csproj", "{9BF00483-4E14-4977-B4BE-03D505F4F35F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.Client", "DaySchedulerApp.Client\DaySchedulerApp.Client.csproj", "{9BF00483-4E14-4977-B4BE-03D505F4F35F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
