@@ -7,3 +7,21 @@ li{
     list-style-type: none;
     margin-right: 2rem;
 }
+
+img{
+    height: 32px;
+    width: 28px;
+}
+
+.contact-content {
+    color: #5F8399;
+}
+
+.autor-content {
+    color: #5F8399;
+    font-size: 0.7rem;
+}
+
+p{
+    text-align: center;
+}
