@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.UnitTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaySchedulerApp.Client", "DaySchedulerApp.Client\DaySchedulerApp.Client.csproj", "{9BF00483-4E14-4977-B4BE-03D505F4F35F}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2DBB525B-44FF-45C5-8F61-1A6365D422A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{9BF00483-4E14-4977-B4BE-03D505F4F35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF00483-4E14-4977-B4BE-03D505F4F35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF00483-4E14-4977-B4BE-03D505F4F35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBB525B-44FF-45C5-8F61-1A6365D422A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBB525B-44FF-45C5-8F61-1A6365D422A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBB525B-44FF-45C5-8F61-1A6365D422A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBB525B-44FF-45C5-8F61-1A6365D422A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  assigmentdb:
+    image: mongo
+
+  dayschedulerapp.api:
+    image: ${DOCKER_REGISTRY-}dayschedulerappapi
+    build:
+      context: .
+      dockerfile: DaySchedulerApp.Api/Dockerfile
+
+volumes:
+  mongo_data:

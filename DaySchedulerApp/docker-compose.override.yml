@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  assigmentdb:
+    container_name: assigmentdb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  dayschedulerapp.api:
+    container_name: assigment.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "DaySchedulerDatabase:ConnectionString=mongodb://assigmentdb:27017"
+    depends_on:
+      - assigmentdb
+    ports:
+      - "8000:80"
+      - "9000:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
