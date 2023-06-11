@@ -15,6 +15,14 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - "DaySchedulerDatabase:ConnectionString=mongodb://assigmentdb:27017"
+      - Serilog__MinimumLevel=Information
+      - Serilog__WriteTo__0__Name=Console
+      - Serilog__WriteTo__1__Name=MongoDBBson
+      - Serilog__WriteTo__1__Args__databaseUrl=mongodb://assigmentdb:27017/DayScheduler
+      - Serilog__WriteTo__1__Args__collectionName=log
+      - Serilog__WriteTo__1__Args__cappedMaxSizeMb=25
+      - Serilog__WriteTo__1__Args__cappedMaxDocuments=1000
+      - Serilog__WriteTo__1__Args__restrictedToMinimumLevel=Warning
     depends_on:
       - assigmentdb
     ports:
