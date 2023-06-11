@@ -20,7 +20,7 @@ namespace DaySchedulerApp.Identity
             services.Configure<DayScheduleIdentitySettings>(configuration.GetSection("DaySchedulerDatabase"));
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-            services.AddTransient<IAuthService, AuthService>();
+			services.AddTransient<IAuthService, AuthService>();
             services.AddScoped<IPasswordHasher<ApplicationUser>, PasswordHasher<ApplicationUser>>();
 
             var identityConfiguration = new IdentityConfiguration(configuration).Configuration;
@@ -50,6 +50,9 @@ namespace DaySchedulerApp.Identity
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
                 };
             });
+
+            var seedData = new SeedData(configuration, services);
+            seedData?.Seed();
 
             return services;
         }
